@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+
+{% block inline_javascript %}
+<script>
+function handleSubmit(event) {
+    const text = document.querySelector('#char-input').value
+  
+    axios
+      .get(`/get_animes?text=${text}`).then(({data}) => {
+        document.querySelector('#char-count').textContent = `${data.count} characters!`
+      })
+      .catch(err => console.log(err))
+  }
+</script>
+{% endblock inline_javascript %}
+{% block javascript %}
+<script>
+
+</script>
+
+{% endblock javascript %}
+{% block content %}
+<div className="App">
+    <header className="App-header">
+      <p>
+        VSG-Searcher
+      </p>
+      <form type="get" action="anime" style="margin: 0">
+        <input  id="q" type="text" name="q"  placeholder="Search..." >
+        <button id="search_submit" type="submit" >Submit</button>
+    </form>
+    </header>
+  </div>
+
+{% endblock content %}
+ 
