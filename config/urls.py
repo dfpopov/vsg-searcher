@@ -7,11 +7,10 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
-from vsg_searcher.contrib.views import get_animes
+from vsg_searcher.contrib.views import GetAnimeAPIView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path("anime/", get_animes, name="get_animes"),
+    path("", GetAnimeAPIView.as_view(), name="get-anime"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

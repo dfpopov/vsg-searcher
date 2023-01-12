@@ -4,6 +4,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
+from django import forms
+from vsg_searcher.users.forms import UserChangeForm
 
 User = get_user_model()
 
@@ -19,9 +21,8 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-
     model = User
-    fields = ["name"]
+    form_class = UserChangeForm
     success_message = _("Information successfully updated")
 
     def get_success_url(self):
