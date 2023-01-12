@@ -115,6 +115,9 @@ PASSWORD_HASHERS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
+        'NAME': 'vsg_searcher.users.password_validation.RequiredNumberPasswordValidator',
+    },
+    {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
     {
@@ -125,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-#    {"NAME": "vsg_searcher.users.password_validation.RequiredNumberPasswordValidator"},
 ]
 
 # MIDDLEWARE
