@@ -1,38 +1,49 @@
 {% extends "base.html" %}
 
-
-
-{% block inline_javascript %}
-<script>
-function handleSubmit(event) {
-    const text = document.querySelector('#char-input').value
-  
-    axios
-      .get(`/get_animes?text=${text}`).then(({data}) => {
-        document.querySelector('#char-count').textContent = `${data.count} characters!`
-      })
-      .catch(err => console.log(err))
-  }
-</script>
-{% endblock inline_javascript %}
-{% block javascript %}
-<script>
-
-</script>
-
-{% endblock javascript %}
 {% block content %}
 <div className="App">
-    <header className="App-header">
-      <p>
-        VSG-Searcher
-      </p>
-      <form type="get" action="anime" style="margin: 0">
-        <input  id="q" type="text" name="q"  placeholder="Search..." >
-        <button id="search_submit" type="submit" >Submit</button>
-    </form>
+    <header className="App-header container">
+      <div class="row align-items-center text-center">
+        <img 
+          src="https://vsgbg.com/wp-content/uploads/vsg_bulgaria_logo.svg" 
+          height="150rem"
+          class="mt-4"
+        >
+        </img>
+        <form type="get" action='.' class="row mt-5">
+          <input  id="search" type="text" class="col-sm-10" name="search"  placeholder="Type here..." >
+          <button id="search_submit" class="col-sm-2" type="submit" >Search</button>
+        </form>
+        {% for profile in data %}
+        <a href="{{ profile.url }}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-decoration-none">
+          <div class="card-deck shadow-sm">
+            <div class="card my-4 align-items-center">
+              <div class="card-body">
+                <span class="card-text">{{ profile.title }}</span>
+              </div>
+              <img src="{{ profile.image_url }}" height="200rem" width="200rem"></img><br>
+              <div>
+                <span>Rank - {{ profile.rank }},</span>
+                <span>Popularity - {{ profile.popularity }}.</span>
+                <p class="card-text">{{ profile.rating }}.</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
     </header>
   </div>
 
 {% endblock content %}
  
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script>
+  $(document).ready(function(){
+    $("#search").val('{{ request.GET.search }}');
+  });
+</script>
+{% endblock javascript %}
