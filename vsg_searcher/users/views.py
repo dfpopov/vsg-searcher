@@ -4,7 +4,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
-from django import forms
 from vsg_searcher.users.forms import UserChangeForm
 
 User = get_user_model()
